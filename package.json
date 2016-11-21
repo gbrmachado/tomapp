@@ -1,0 +1,25 @@
+{
+  "name": "pomodoro_app",
+  "version": "1.0.0",
+  "description": "A pomodoro API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha"
+  },
+  "keywords": [
+    "pomodoro",
+    "productivity"
+  ],
+  "author": "Goma, <gbrmachado@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "moment": "^2.16.0",
+    "socket.io": "^1.6.0",
+    "socket.io-client": "^1.6.0"
+  }
+}
