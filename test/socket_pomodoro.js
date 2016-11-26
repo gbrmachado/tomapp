@@ -5,7 +5,7 @@ var Pomodoro = require('../models/pomodoro');  //Pomodoro Class
 
 var io = require('socket.io-client');          //socket.IO
 
-var socketURL = 'http://0.0.0.0:5000';         //socketURL
+var socketURL = 'http://0.0.0.0:3000';         //socketURL
 
 var options ={
   transports: ['websocket'],
@@ -13,8 +13,11 @@ var options ={
 };
 
 describe('Test Socket Pomodoro', function() {
-    var client = io.connect(socketURL, options);
 
+    var client = io.connect(socketURL, options);
+    beforeEach(function() {
+        server = require('../server');
+    })
     it('Test websocket connection', function() {
         client.on('messages', function(data) {
             expect(data.code).to.equal(200);
