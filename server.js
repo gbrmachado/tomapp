@@ -52,6 +52,8 @@ io.on('stop_pomodoro', function(client) {
 var router = require('./routes/routes_pomodoro')(app, pomodoro);
 app.use('/', router);
 
-app.listen(3000, function() {
+var server = app.listen(3000, function() {
     console.log("Server running on port 3000");
 })
+
+module.exports = server;

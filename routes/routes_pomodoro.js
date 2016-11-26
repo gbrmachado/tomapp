@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var Pomodoro = require('../models/pomodoro');
 
 module.exports = function(app, pomodoro) {
     router.get('/pomodoro/status', function(req, res) {
