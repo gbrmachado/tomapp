@@ -4,10 +4,10 @@ var server    = require('http').createServer(app);
 var io        = require('socket.io')(server);
 
 var Pomodoro  = require('./models/pomodoro');
-
-
 var pomodoro = null;
 
+
+//Socket.IO Server
 io.on('connection', function(client) {
     console.log("client connected");
     client.emit('message', 'Connected');
@@ -18,8 +18,8 @@ io.on('start_pomodoro', function(client) {
     if ( !pomodoro || !pomodoro.running( now ) ) {
         pomodoro = new Pomodoro(client.tags, client.description);
         client.emit('messages', {
-            code: 200, 
-            message: 'Pomodoro created', 
+            code: 200,
+            message: 'Pomodoro created',
             pomodoro: pomodoro
         });
     } else {
@@ -47,31 +47,10 @@ io.on('stop_pomodoro', function(client) {
     }
 });
 
-app.get('/pomodoro/status', function(req, res) {
-    if (!pomodoro) {
-        res.status(403).json("False");
-    } else {
-        res.status(200).json(pomodoro);
-    }
-});
 
-app.post('/pomodoro/create', function(req, res) {
-    if (!pomodoro) {
-        pomodoro = new Pomodoro(req.params.tags, req.params.description);
-        res.status(200).json({code:200, message: 'Pomodoro created'})
-    } else {
-        res.status(403).json({message: 'The is an active pomodoro'})
-    }
-});
-
-app.get('/pomodoro/stop', function(req, res) {
-    if (!pomodoro) {
-        res.status(403).json({message: 'There is no active pomodoro'})
-    } else {
-        pomodoro.stop();
-        res.status(200).json({message: 'Pomodoro stoped'})
-    }
-})
+//Express Routes
+var router = require('./routes/routes_pomodoro')(app, pomodoro);
+app.use('/', router);
 
 app.listen(3000, function() {
     console.log("Server running on port 3000");
