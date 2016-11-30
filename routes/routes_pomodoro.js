@@ -11,6 +11,15 @@ module.exports = function(app, pomodoro) {
         }
     });
 
+    router.get('/pomodoro/interrupt', function(req, res) {
+        if (!pomodoro) {
+            res.status(403).json("There is no active pomodoro");
+        } else {
+            pomodoro.inc_interruption();
+            res.status(200).json('Interruption Increased');
+        }
+    });
+    
     router.post('/pomodoro/create', function(req, res) {
         if (!pomodoro) {
             pomodoro = new Pomodoro(req.params.tags, req.params.description);
