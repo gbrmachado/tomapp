@@ -3,8 +3,7 @@ var Pomodoro = require('../models/pomodoro');
 module.exports = function(server) {
     var io = require('socket.io')(server);
     io.on('connection', function (client) {
-        client.on("start_pomodoro", function(data) {
-            var date_now = new Date();
+        client.on('start_pomodoro', function() {
             if ( !global.pomodoro ) {
                 global.pomodoro = new Pomodoro(client.tags, client.description);
                 client.emit('messages', {
@@ -17,14 +16,13 @@ module.exports = function(server) {
                     code:403,
                     message: 'There is an active pomodoro already',
                     pomodoro: global.pomodoro
-                })
+                });
             }
-        })
+        });
 
-        client.on("status_pomodoro", function() {
+        client.on('status_pomodoro', function() {
             client.emit('messages', global.pomodoro);
-
-        })
+        });
 
         client.on('stop_pomodoro', function() {
             if (!global.pomodoro) {
@@ -36,7 +34,6 @@ module.exports = function(server) {
             else {
                 global.pomodoro.stop();
                 global.pomodoros.push(global.pomodoro);
-                console.log(global.pomodoros);
 
                 client.emit('messages', {
                     code: 200,
@@ -46,4 +43,4 @@ module.exports = function(server) {
             }
         });
     });
-}
+};

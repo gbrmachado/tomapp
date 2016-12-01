@@ -19,7 +19,7 @@ describe('Loading express', function () {
         .expect(404, done);
     });
     it('creates and stop a pomodoro', (done) => {
-        var new_pomodoro = { tags: ["test", "test2"], description: "test" };
+        var new_pomodoro = { tags: ['test', 'test2'], description: 'test' };
 
         request(server)
         .get('/pomodoro/status')
@@ -50,6 +50,6 @@ describe('Loading express', function () {
 
         request(server)
         .get('/pomodoro/status')
-        .expect(403, done)
-    })
+        .expect(403, done);
+    });
 });

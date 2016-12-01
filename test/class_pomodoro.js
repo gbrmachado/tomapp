@@ -1,3 +1,5 @@
+/*eslint-disable no-alert, no-console */
+
 var chai   = require('chai'),
     expect = chai.expect;
 

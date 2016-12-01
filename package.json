@@ -4,7 +4,8 @@
   "description": "A pomodoro API",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha"
+    "test": "node node_modules/mocha/bin/mocha",
+    "lint": "eslint ."
   },
   "keywords": [
     "pomodoro",
