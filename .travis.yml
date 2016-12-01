@@ -9,7 +9,9 @@ branches:
         - master
 
 before_install:
+    - npm install -g eslint
     - npm install
-    
+
 script:
+    - npm run lint
     - npm run test

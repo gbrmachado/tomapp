@@ -4,7 +4,7 @@ global.pomodoro  = null;
 global.pomodoros = [];
 
 //SocketIO
-var io = require('./socket_io/socket')(server);
+require('./socket_io/socket')(server);
 
 //Express Routes
 var router    = require('./routes/routes_pomodoro')(app);

@@ -41,10 +41,10 @@ module.exports = class Pomodoro {
         var now_moment = moment(now);
         var start_time = moment(this.start_time);
         var end_time   = moment(this.end_time);
-        return now_moment.isBetween(start_time, end_time)
+        return now_moment.isBetween(start_time, end_time);
     }
 
     stop() {
         this._end_time = new Date();
     }
-}
+};
